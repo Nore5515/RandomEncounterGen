@@ -7,6 +7,8 @@ public class Main {
 
         Main m = new Main();
 
+        System.out.println("Hello World!");
+
     }
 
 
