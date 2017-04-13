@@ -20,14 +20,85 @@ public class Main {
     public String newEncounter(){
         String s = new String();
         Random rand = new Random();
-        age = rand.nextInt(5)+1;
-        weatherSav = rand.nextInt(5)+1;
-        fertility = getHighestRoll(age + 1 - weatherSav);
-        risk = getHighestRoll(age + fertility - 4);
-        reward = getHighestRoll(risk + fertility + age - 8);
+        String loc = "BAAH";
+        int locTemp = -1;
+        int ageBoost, wesBoost, ferBoost, rskBoost, rwdBoost, impBoost;
+
+        locTemp = rand.nextInt(8) + 1;
+        if (locTemp == 1) {
+            loc = "Island";
+            ageBoost = 2;
+            wesBoost = 1;
+            ferBoost = 2;
+            rskBoost = 1;
+            rwdBoost = 0;
+        } else if (locTemp == 2){
+            loc = "Mountain";
+            ageBoost = 3;
+            wesBoost = 2;
+            ferBoost = 1;
+            rskBoost = 2;
+            rwdBoost = 1;
+        } else if (locTemp == 3){
+            loc = "Crashed Ship";
+            ageBoost = -1;
+            wesBoost = 0;
+            ferBoost = -3;
+            rskBoost = 2;
+            rwdBoost = 3;
+        } else if (locTemp == 4){
+            loc = "Scout Ship";
+            ageBoost = -2;
+            wesBoost = 0;
+            ferBoost = -3;
+            rskBoost = 1;
+            rwdBoost = 2;
+        } else if (locTemp == 5){
+            loc = "Gaping Hole";
+            ageBoost = 3;
+            wesBoost = 3;
+            ferBoost = -5;
+            rskBoost = 3;
+            rwdBoost = 0;
+        } else if (locTemp == 6){
+            loc = "Tornado";
+            ageBoost = -3;
+            wesBoost = 5;
+            ferBoost = -5;
+            rskBoost = 3;
+            rwdBoost = -1;
+        } else if (locTemp == 7){
+            loc = "Monster Corpse";
+            ageBoost = 0;
+            wesBoost = 0;
+            ferBoost = 3;
+            rskBoost = 3;
+            rwdBoost = 3;
+        } else if (locTemp == 8){
+            loc = "Shallows";
+            ageBoost = 2;
+            wesBoost = 1;
+            ferBoost = 2;
+            rskBoost = 1;
+            rwdBoost = 0;
+        } else{
+            loc = "ERR";
+            ageBoost = 1000;
+            wesBoost = 1000;
+            ferBoost = 1000;
+            rskBoost = 1000;
+            rwdBoost = 1000;
+        }
+
+        age = getHighestRoll(rand.nextInt(5) + 1 + ageBoost);
+        weatherSav = getHighestRoll(rand.nextInt(5) + 1 + wesBoost);
+        fertility = getHighestRoll(age + 1 - weatherSav + ferBoost);
+        risk = getHighestRoll(age + fertility - 4 + rskBoost);
+        reward = getHighestRoll(risk + fertility + age - 8 + rwdBoost);
         importance = getHighestRoll(risk - reward);
 
         //s += "Age:\t" + age;
+        s += String.format("%-20s%n", loc);
         s += String.format("%-20s|%d|%n","Age", age);
         s += String.format("%-20s|%d|%n","Weather Savagery",weatherSav);
         s += String.format("%-20s|%d|%n","Fertility",fertility);
@@ -39,12 +110,13 @@ public class Main {
         return s;
     }
 
-    public String massEncounter(int count){
+    public String massEncounter(int count) {
         String s = new String();
         Random rand = new Random();
         String loc = "BAAH";
         int locTemp = -1;
-        int ageTotal,wesTotal,ferTotal,rskTotal,rwdTotal,impTotal;
+        int ageBoost, wesBoost, ferBoost, rskBoost, rwdBoost, impBoost;
+        int ageTotal, wesTotal, ferTotal, rskTotal, rwdTotal, impTotal;
         ageTotal = 0;
         wesTotal = 0;
         ferTotal = 0;
@@ -52,19 +124,85 @@ public class Main {
         rwdTotal = 0;
         impTotal = 0;
 
-        s += String.format("%-20s|%3s|%3s|%3s|%3s|%3s|%3s%n","LOCATION","AGE","WES","FER","RSK","RWD","IMP");
+        s += String.format("%-20s|%3s|%3s|%3s|%3s|%3s|%3s%n", "LOCATION", "AGE", "WES", "FER", "RSK", "RWD", "IMP");
 
-        for (int x = 0; x < count; x++){
-            age = rand.nextInt(5)+ 1);
-            weatherSav = getHighestRoll(rand.nextInt(5)+1);
-            fertility = getHighestRoll(age + 1 - weatherSav);
-            risk = getHighestRoll(age + fertility - 4);
-            reward = getHighestRoll(risk + fertility + age - 8);
+        for (int x = 0; x < count; x++) {
+
+            locTemp = rand.nextInt(8) + 1;
+            if (locTemp == 1) {
+                loc = "Island";
+                ageBoost = 2;
+                wesBoost = 1;
+                ferBoost = 2;
+                rskBoost = 1;
+                rwdBoost = 0;
+            } else if (locTemp == 2){
+                loc = "Mountain";
+                ageBoost = 3;
+                wesBoost = 2;
+                ferBoost = 1;
+                rskBoost = 2;
+                rwdBoost = 1;
+            } else if (locTemp == 3){
+                loc = "Crashed Ship";
+                ageBoost = -1;
+                wesBoost = 0;
+                ferBoost = -3;
+                rskBoost = 2;
+                rwdBoost = 3;
+            } else if (locTemp == 4){
+                loc = "Scout Ship";
+                ageBoost = -2;
+                wesBoost = 0;
+                ferBoost = -3;
+                rskBoost = 1;
+                rwdBoost = 2;
+            } else if (locTemp == 5){
+                loc = "Gaping Hole";
+                ageBoost = 3;
+                wesBoost = 3;
+                ferBoost = -5;
+                rskBoost = 3;
+                rwdBoost = 0;
+            } else if (locTemp == 6){
+                loc = "Tornado";
+                ageBoost = -3;
+                wesBoost = 5;
+                ferBoost = -5;
+                rskBoost = 3;
+                rwdBoost = -1;
+            } else if (locTemp == 7){
+                loc = "Monster Corpse";
+                ageBoost = 0;
+                wesBoost = 0;
+                ferBoost = 3;
+                rskBoost = 3;
+                rwdBoost = 3;
+            } else if (locTemp == 8){
+                loc = "Shallows";
+                ageBoost = 2;
+                wesBoost = 1;
+                ferBoost = 2;
+                rskBoost = 1;
+                rwdBoost = 0;
+            } else{
+                loc = "ERR";
+                ageBoost = 1000;
+                wesBoost = 1000;
+                ferBoost = 1000;
+                rskBoost = 1000;
+                rwdBoost = 1000;
+            }
+
+            age = getHighestRoll(rand.nextInt(5) + 1 + ageBoost);
+            weatherSav = getHighestRoll(rand.nextInt(5) + 1 + wesBoost);
+            fertility = getHighestRoll(age + 1 - weatherSav + ferBoost);
+            risk = getHighestRoll(age + fertility - 4 + rskBoost);
+            reward = getHighestRoll(risk + fertility + age - 8 + rwdBoost);
             importance = getHighestRoll(risk - reward);
-            locTemp = rand.nextInt(8)+1;
 
 
-            s += String.format("%-20s|%-3d|%-3d|%-3d|%-3d|%-3d|%-3d%n",loc,age,weatherSav,fertility,risk,reward,importance);
+            s += String.format("%-20s|%-3d|%-3d|%-3d|%-3d|%-3d|%-3d%n", loc, age, weatherSav, fertility, risk, reward, importance);
 
             ageTotal += age;
             wesTotal += weatherSav;
@@ -74,15 +212,9 @@ public class Main {
             impTotal += importance;
         }
         s += "-----------------------------";
-        s += String.format("%n%-3d|%-3d|%-3d|%-3d|%-3d|%-3d%n", ageTotal/count,wesTotal/count,ferTotal/count,rskTotal/count,rwdTotal/count,impTotal/count);
+        s += String.format("%n%-20s|%-3d|%-3d|%-3d|%-3d|%-3d|%-3d%n","AVG", ageTotal / count, wesTotal / count, ferTotal / count, rskTotal / count, rwdTotal / count, impTotal / count);
 
         return s;
-    }
-
-    public String getLoc(int pos){
-        if (pos == 0){
-            "Island"
-        }
     }
 
     public int getHighestRoll(int rolls) {
